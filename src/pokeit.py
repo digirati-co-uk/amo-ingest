@@ -4,7 +4,6 @@ import settings
 import json
 import sys
 from time import time, sleep
-from uuid import uuid4
 from jwt_client import JWTClient
 
 
@@ -30,9 +29,12 @@ def pokeit(s, template):
 
     manifest_id, manifest = get_manifest(template)
     click.echo(
-        click.style("Manifest created as: ", fg="green") + click.style(manifest_id, fg="yellow")
+        click.style("Manifest being created: ", fg="green") + click.style(manifest_id, fg="yellow")
     )
     add_to_presley(manifest)
+    click.echo(
+        click.style("Manifest posted to Presley as: ", fg="green") + click.style(manifest_id, fg="yellow")
+    )
     return check_giles(manifest_id, check_success, success_criteria), manifest_id
 
 
@@ -162,32 +164,54 @@ def es_query(query):
 
 def process_message(message):
 
-    if message.get('message_type') == "Presley_Manifest_Added" \
-            or message.get('message_type') == "Presley_Manifest_Updated":
+    if (
+        message.get("message_type") == "Presley_Manifest_Added"
+        or message.get("message_type") == "Presley_Manifest_Updated"
+    ):
         manifest_id = message.get("manifest_id")
-        click.echo(click.style("Manifest ", fg="green") + click.style(manifest_id, fg="blue") +
-                   click.style(" added to Presley", fg="green"))
+        click.echo(
+            click.style("Manifest ", fg="green")
+            + click.style(manifest_id, fg="blue")
+            + click.style(" added to Presley", fg="green")
+        )
 
-    elif message.get('message_type') == "Destiny_Manifest_Added":
+    elif message.get("message_type") == "Destiny_Manifest_Added":
         manifest_id = message.get("manifest_id")
-        click.echo(click.style("Manifest ", fg="green") + click.style(manifest_id, fg="blue") +
-                   click.style(" added to Destiny", fg="green"))
+        click.echo(
+            click.style("Manifest ", fg="green")
+            + click.style(manifest_id, fg="blue")
+            + click.style(" added to Destiny", fg="green")
+        )
 
-    elif message.get('message_type') == "Canvas_Processed":
+    elif message.get("message_type") == "Canvas_Processed":
         canvas_id = message.get("canvas_id")
         resolution = message.get("resolution")
         process = message.get("process")
-        click.echo(click.style("Canvas ", fg="green") + click.style(canvas_id, fg="blue") +
-                   click.style(" processed by ", fg="green") + click.style(process, fg="red")
-                   + " " + click.style(resolution.upper(), fg="black", bg="green" if resolution == "success" else "red"))
+        click.echo(
+            click.style("Canvas ", fg="green")
+            + click.style(canvas_id, fg="blue")
+            + click.style(" processed by ", fg="green")
+            + click.style(process, fg="red")
+            + " "
+            + click.style(
+                resolution.upper(), fg="black", bg="green" if resolution == "success" else "red"
+            )
+        )
 
-    elif message.get('message_type') == "Manifest_Processed":
+    elif message.get("message_type") == "Manifest_Processed":
         manifest_id = message.get("manifest_id")
         resolution = message.get("resolution")
         process = message.get("process")
-        click.echo(click.style("Manifest ", fg="green") + click.style(manifest_id, fg="blue") +
-                   click.style(" processed by ", fg="green") + click.style(process, fg="red")
-                   + " " + click.style(resolution.upper(), fg="black", bg="green" if resolution == "success" else "red"))
+        click.echo(
+            click.style("Manifest ", fg="green")
+            + click.style(manifest_id, fg="blue")
+            + click.style(" processed by ", fg="green")
+            + click.style(process, fg="red")
+            + " "
+            + click.style(
+                resolution.upper(), fg="black", bg="green" if resolution == "success" else "red"
+            )
+        )
 
 
 def get_manifest(template):
@@ -211,6 +235,7 @@ def add_to_presley(manifest):
         data=manifest.encode("utf-8"),
         headers={"Content-Type": "application/json"},
     )
+    print("Presley response: ", resp.status_code)
     resp.raise_for_status()
 
 

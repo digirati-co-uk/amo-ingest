@@ -23,7 +23,8 @@ def checkit(manifest):
         click.echo(click.style('could not obtain manifest', bg="red", fg="black"))
         return 1
     manifest = json.loads(manifest_response.text)
-
+    if manifest:
+        print("Got manifest")
     sequence_count = 0
     canvas_count = 0
     other_content_count = 0
@@ -83,14 +84,18 @@ def checkit(manifest):
                             label = other_content.get('label')
                             if label in settings.OTHER_CONTENT_LABELS:
                                 at_id = other_content.get('@id')
-                                try:
-                                    response = requests.get(at_id)
-                                    if response.ok:
+                                if settings.CHECKIT_GET_OC:
+                                    try:
+                                        response = requests.get(at_id)
+                                        if response.ok:
+                                            other_content_success += 1
+                                        else:
+                                            failures.append(f"status code {response.status_code} for canvas {at_id}")
+                                    except RequestException:
+                                        failures.append(f"could not obtain {at_id}")
+                                else:
+                                    if settings.CHECKIT_GET_OC_SUCCESS:
                                         other_content_success += 1
-                                    else:
-                                        failures.append(f"status code {response.status_code} for canvas {at_id}")
-                                except RequestException:
-                                    failures.append(f"could not obtain {at_id}")
 
                                 other_content_checked += 1
 
