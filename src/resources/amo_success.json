@@ -1,0 +1,20 @@
+{
+  "timeout": 120,
+  "required": [
+    {
+      "message_type": "Manifest_Processed",
+      "process": "starsky",
+      "resolution": "success"
+    },
+    {
+      "message_type": "Manifest_Processed",
+      "process": "barbarella",
+      "resolution": "success"
+    },
+    {
+      "message_type": "Manifest_Processed",
+      "process": "kingfisher",
+      "resolution": "success"
+    }
+  ]
+}
