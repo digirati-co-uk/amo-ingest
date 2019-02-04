@@ -31,7 +31,8 @@ def pokeit(s, template):
     click.echo(
         click.style("Manifest being created: ", fg="green") + click.style(manifest_id, fg="yellow")
     )
-    add_to_presley(manifest)
+    add_to_presley(manifest)  # this function is basically all you need to push things into the DLCS.
+    # Everything else is just real time monitoring of progress.
     click.echo(
         click.style("Manifest posted to Presley as: ", fg="green") + click.style(manifest_id, fg="yellow")
     )
