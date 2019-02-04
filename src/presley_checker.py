@@ -6,7 +6,7 @@ def check_manifest(manifest_uri):
     """
     Check if an AMO manifest exists in the DLCS.
 
-    :param manifest_uri:
+    :param manifest_uri: the @id for the manifest.
     :return:
     """
     if manifest_uri:
@@ -26,7 +26,7 @@ def check_all(text_file):
     """
     Check all manifests in a text file.
 
-    :param text_file:
+    :param text_file: file with manifests one, per line.
     :return:
     """
     if os.path.exists(text_file):
@@ -41,6 +41,5 @@ def check_all(text_file):
                     print("\n")
 
 
-# print(check_manifest("http://f9e1ea2c-20b1-11e9-ba92-d9b3dc251f06"))
 
 check_all('../manifests_pdfs_ststithians.txt')

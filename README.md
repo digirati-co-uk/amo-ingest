@@ -144,6 +144,8 @@ cd /src/
 python -s ./resources/amo_success.json http://ststithians.africamediaonline.com/manifest?media_id=1216_1036&depot_id=1860
 ```
 
+The success file tells the code what services to watch for in the event stream.
+
 Pokeit will post a manifest to Presley, and stream back the canvas by canvas processing output.
 
 You can see the services being added, and their success or failure. 
