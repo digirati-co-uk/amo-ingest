@@ -60,8 +60,16 @@ The basic flow is:
 
 ### Pokeit
 
+Pokeit can POST a manifest to Presley and then be configured with some JSON that monitors the output from Giles and Destiny to give you real time reporting on the progress of a manifest through the pipeline.
+
+Pokeit is a useful command-line tool for ingesting content, and also a good set of proof of concept code to look at as a model for writing your own.
+
 ### Checkit
 
+Checkit will run through all of the services of a manifest and will check that the services and otherContent on a manifest are valid.
+
 ### Hokeypokey
+
+Hokeypokey uses Pokeit to ingest a manifest and then uses Checkit to validate the output.
 
 
