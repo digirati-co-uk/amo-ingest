@@ -37,6 +37,8 @@ There is a service called Destiny which watches for new content in Presley, and 
 
 ### Giles
 
+__N.B. Giles, and Pokeit rely on an IP restricted service, so please provide us with whitelisted IPs, and we'll add them to the list__
+
 Giles provides a simple Elasticsearch based reporting interface on top of Iris/Destiny, and it's Giles that is monitored by the code in this repository to return updates on the canvas by canvas status of the processing of a manifest.
 
 You can see, for example, the past 4 minutes of traffic by doing:
