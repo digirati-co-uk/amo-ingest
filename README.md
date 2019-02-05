@@ -150,7 +150,7 @@ Pokeit will post a manifest to Presley, and stream back the canvas by canvas pro
 
 You can see the services being added, and their success or failure. 
 
-N.B. if there are already many existing canvases in the processing queue, pokeit may time out, as it waits for the success messages for just the canvases in this manifest. If there are already many canvases in the queue, it will time out after around 100 seconds.
+N.B. if there are already many existing canvases in the processing queue, pokeit may time out, as it waits for the success messages for just the canvases in this manifest, and if there are already dozens or hundreds of images ahead in the queue, it'll not get the success messages back in real time. If there are already many canvases in the queue, it will time out after around 100 seconds. 
 
 N.B. __One important thing to note, because the AMO manifests use parameters, and removing the final parameter returns a _different_ manifest for the same content, the manifest URI should be wrapped in quotes.__
 
