@@ -1,0 +1,9 @@
+ES_HOST = "https://giles.dlc-services.africamediaonline.com/"
+ES_INDEX = "giles"
+PRESLEY_BASE = "https://presley.dlc-services.africamediaonline.com/iiif"
+PRESLEY_USER = "REDACTED"
+PRESLEY_PASS = "REDACTED"
+UPDATE_INTERVAL = 5
+OTHER_CONTENT_LABELS = ["Transcription annotations"]
+REQUIRED_OTHER_CONTENT = []
+SERVICE_PROFILES = ["http://iiif.io/api/search/0/search"]
