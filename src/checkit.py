@@ -18,6 +18,7 @@ def checkit(manifest):
     print(f"checkit for manifest {manifest}")
 
     try:
+        print(f'fetching manifest: {manifest}')
         manifest_response = requests.get(manifest)
     except RequestException:
         click.echo(click.style('could not obtain manifest', bg="red", fg="black"))
@@ -51,6 +52,7 @@ def checkit(manifest):
                     # special case for search service, requires query param
                     if profile == 'http://iiif.io/api/search/0/search':
                         at_id += '?q=the'
+                    print(f'fetching service: {at_id}')
                     response = requests.get(at_id)
                     if not response.ok:
                         failures.append(f"status code {response.status_code} for service {at_id}")
@@ -86,6 +88,7 @@ def checkit(manifest):
                                 at_id = other_content.get('@id')
                                 if settings.CHECKIT_GET_OC:
                                     try:
+                                        print(f'fetching other_content: {at_id}')
                                         response = requests.get(at_id)
                                         if response.ok:
                                             other_content_success += 1
