@@ -71,11 +71,12 @@ def checkit(manifest):
                 failures.append(f'sequence {sequence_id} has no canvases')
             else:
                 for canvas in canvases:
+                    print(f"Checking canvas {canvas.get('@id')}")
                     canvas_count += 1
                     canvas_id = canvas.get('@id')
                     other_contents = canvas.get('otherContent')
                     if not other_contents:
-                        failures.append(f'canvas {canvas_id} has no other contents')
+                        failures.append(f'canvas {canvas_id} has no other content.')
                     else:
                         oc_labels = [oc.get('label') for oc in other_contents]
                         for label in settings.REQUIRED_OTHER_CONTENT:
@@ -86,19 +87,16 @@ def checkit(manifest):
                             label = other_content.get('label')
                             if label in settings.OTHER_CONTENT_LABELS:
                                 at_id = other_content.get('@id')
-                                if settings.CHECKIT_GET_OC:
-                                    try:
-                                        print(f'fetching other_content: {at_id}')
-                                        response = requests.get(at_id)
-                                        if response.ok:
-                                            other_content_success += 1
-                                        else:
-                                            failures.append(f"status code {response.status_code} for canvas {at_id}")
-                                    except RequestException:
-                                        failures.append(f"could not obtain {at_id}")
-                                else:
-                                    if settings.CHECKIT_GET_OC_SUCCESS:
+                                try:
+                                    print(f'fetching other_content: {at_id}')
+                                    response = requests.get(at_id)
+                                    if response.ok:
                                         other_content_success += 1
+                                    else:
+                                        failures.append(f"status code {response.status_code} for canvas {at_id}")
+                                except RequestException:
+                                    failures.append(f"could not obtain {at_id}")
+
 
                                 other_content_checked += 1
 
