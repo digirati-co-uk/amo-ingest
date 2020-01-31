@@ -77,6 +77,7 @@ def check_giles(manifest_id, check_success, success_criteria):
                 if message_id not in received:
                     process_message(message)
                     received.add(message_id)
+                    start_time = int(round(time()))  # We had a new message, let's just reset the timer
                     if check_success:
                         successful = check_message(message, success_criteria)
                         if successful:
