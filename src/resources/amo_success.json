@@ -1,5 +1,5 @@
 {
-  "timeout": 120,
+  "timeout": 3000,
   "required": [
     {
       "message_type": "Manifest_Processed",

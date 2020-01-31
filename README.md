@@ -143,7 +143,7 @@ To setup a Python environment for pokeit:
 
 ```bash
 cd /src/
-python -s ./resources/amo_success.json http://ststithians.africamediaonline.com/manifest?media_id=1216_1036&depot_id=1860
+python pokeit.py -s ./resources/amo_success.json "http://ststithians.africamediaonline.com/manifest?media_id=1216_1036&depot_id=1860"
 ```
 
 The success file tells the code what services to watch for in the event stream.
